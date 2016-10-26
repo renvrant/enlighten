@@ -3,7 +3,7 @@
 Simple python app made for the purpose of sharing stories with others
 about difficulties and transgressions that minority groups experience in
 the work place. The goal of this project is to raise awareness for people
-about the challenges and injustices that minority groups experience
+about the challenges that minority groups experience
 (and hopefully to inspire change).
 
 ### Setting up
