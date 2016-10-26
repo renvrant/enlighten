@@ -3,3 +3,4 @@ env/
 **/*.pyc
 test.db
 config.py
+.webassets-cache
