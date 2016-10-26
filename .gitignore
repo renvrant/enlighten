@@ -4,3 +4,4 @@ env/
 test.db
 config.py
 .webassets-cache/
+app/static/.webassets-cache/
