@@ -47,7 +47,7 @@ python run.py
 ```
 
 
-##### Creating a Moderator to use
+#### Creating a Moderator to use
 
 If you don't have a moderator created for yourself yet, you'll need to do so from the console. (there is no way
 to 'sign up' as a mod from the app... another moderator must make an account for you.)
