@@ -1,0 +1,32 @@
+{% extends 'Base/layout.html' %}
+
+{% block content %}
+<h1>Share!</h1>
+
+<div class="clearfix">
+  <form class="col col-6 mx-auto" action="{{url_for('transgression.share')}}" method="POST">
+    {{ form.csrf_token }}
+
+    {% if form.errors %}
+    <div class="errors">
+      {% for error in form.errors %}
+      <span style="color: red; font-weight: bold">{{error}}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <p class="form-group">
+      {{ form.title.label }} {{ form.title(size=40) }}
+    </p>
+
+    <p class="form-group">
+      {{ form.content.label }}
+      {{ form.content() }}
+    </p>
+
+    <div class="form-button">
+      <button type="submit">Share</button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

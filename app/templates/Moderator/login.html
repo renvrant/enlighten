@@ -1,0 +1,33 @@
+{% extends 'Base/layout.html' %}
+
+{% block content %}
+<h1>Login!</h1>
+
+<div class="clearfix">
+  <form class="col col-6 mx-auto" action="{{ url_for('mods.login') }}" method="POST">
+    {{ form.csrf_token }}
+
+    <div class="form-group">
+      {% for err in form.email.errors %}
+      {{ err }}
+      {% endfor %}
+      <p>
+        {{ form.email.label }} {{ form.email(size=20) }}
+      </p>
+    </div>
+
+    <div class="form-group">
+      {% for err in form.password.errors %}
+      {{ err }}
+      {% endfor %}
+      <p>
+        {{ form.password.label }} {{ form.password(size=20) }}
+      </p>
+    </div>
+
+    <div class="form-button">
+      <button type="submit">Login!</button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

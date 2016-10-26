@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enlighten {% block title %}{% endblock title %}</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='normalize.css')}}" />
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" />
+  {% assets 'scss_all' %}
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" type="text/css" />
+  {% endassets %}
+  {% block head %}
+  {% endblock head %}
+</head>
+<body>
+  <div class="app-container clearfix">
+    <aside class="col col-2 side-navigation">
+      <ul class="nav-links">
+        <li class="nav-link">
+          <a href="{{url_for('transgression.index')}}">View All</a>
+        </li>
+        <li class="nav-link">
+          <a href="{{url_for('transgression.share')}}">Share</a>
+        </li>
+        {% if current_user.is_authenticated %}
+
+        <hr>
+
+        <li class="nav-link">
+          <a href="{{url_for('mods.pending')}}">View Pending</a>
+        </li>
+        <li class="nav-link">
+          <a href="{{url_for('mods.create')}}">Create New Moderator</a>
+        </li>
+        <li class="nav-link">
+          <a href="{{url_for('mods.logout')}}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-link">
+          <a href="{{url_for('mods.login')}}">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </aside>
+
+    <section class="col col-10 main-content">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="banner flash-message">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}
+      {% endblock content %}
+    </section>
+  </div>
+</body>
+</html>

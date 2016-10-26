@@ -1,0 +1,19 @@
+{% extends 'Base/layout.html' %}
+
+{% block content %}
+<h1>Incidents Pending Review</h1>
+
+{% if pending_transgressions %}
+  {% for tg in pending_transgressions %}
+    <div class="pending-tg">
+      <h4>
+        <a href="{{url_for('mods.edit_tg', tg_id=tg.id)}}">{{tg.title}}</a>
+      </h4>
+      <div>{{tg.date_created}}</div>
+    </div>
+
+    <hr />
+  {% endfor %}
+{% endif %}
+
+{% endblock content %}

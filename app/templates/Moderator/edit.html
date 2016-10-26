@@ -1,0 +1,31 @@
+{% extends 'Base/layout.html' %}
+
+{% block content %}
+<h1>Editing "{{tg.title}}"</h1>
+
+<a href="{{url_for('mods.pending')}}">Go back</a>
+
+<div class="clearfix">
+  <form class="col col-6 mx-auto" action="{{url_for('mods.edit_tg', tg_id=tg.id)}}" method="POST">
+    {{ form.csrf_token }}
+
+    <div class="form-group">
+      {{ form.title.label }} {{ form.title(size=23) }}
+    </div>
+
+    <div class="form-group">
+      {{ form.content.label }} {{ form.content() }}
+    </div>
+
+    <div class="form-group">
+      {{ form.status.label }} {{ form.status() }}
+    </div>
+
+    <div class="form-button">
+      <button type="submit">
+        Save
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'Base/layout.html' %}
+
+{% block content %}
+<h1>All Incidents</h1>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="banner messages">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<a href="{{ url_for('transgression.share')}}">Share!</a>
+
+{% if transgressions %}
+  <div class="transgressions">
+  {% for tg in transgressions %}
+    <div class="transgression">
+      <h3>
+        <a href="{{ url_for('transgression.view', transgression_id=tg.id) }}">
+          {{ tg.title }}
+        </a>
+      </h3>
+    </div>
+  {% endfor %}
+  </div>
+{% else %}
+  No transgressions found! (Hoorah!)
+{% endif %}
+{% endblock content %}
