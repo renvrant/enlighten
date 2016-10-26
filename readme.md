@@ -20,7 +20,7 @@ git clone https://github.com/riavalon/enlighten.git
 
 Navigate to the project directory and create a virutal environment
 ```bash
-virtualenv evn/
+virtualenv env/
 ```
 
 Activate the environment (there are different activate scripts depending on which shell you use. Ex: zsh, fish, etc)
