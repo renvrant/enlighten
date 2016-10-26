@@ -36,8 +36,16 @@ Install the requirements
 pip install -r requirements.txt
 ```
 
-At this point the only thing left to do is start postgresql and create a database to work with locally.
-Edit `config-sample.py` with the url for the postgres database, username, password, etc.
+At this point the only thing left to do is start postgresql and create a database to work with locally:
+
+`http://postgresapp.com/` or `brew install postgres` will instal PostgreSQL for you. You can then run:
+```bash
+$ psql postgres
+$ CREATE USER username WITH PASSWORD 'password'
+$ CREATE DATABASE enlightendb WITH OWNER username
+```
+
+Edit `config-sample.py` with the url for the postgres database, username, password, etc and save it as `config.py1`.
 
 TODO: add link for instructions on setting up postgresql, mac postgres app, gui app, etc.
 
@@ -65,7 +73,7 @@ db.session.add(me)
 db.session.commit()
 ```
 
-The moderator account should be ready to go!
+You can save the above snippet and run it in your environment. The moderator account should be ready to go!
 
 ### Contributing
 
