@@ -45,9 +45,7 @@ $ CREATE USER username WITH PASSWORD 'password'
 $ CREATE DATABASE enlightendb WITH OWNER username
 ```
 
-Edit `config-sample.py` with the url for the postgres database, username, password, etc and save it as `config.py1`.
-
-TODO: add link for instructions on setting up postgresql, mac postgres app, gui app, etc.
+Edit `config-sample.py` with the url for the postgres database, username, password, etc and save it as `config.py`.
 
 You can run the app with
 ```bash
