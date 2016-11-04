@@ -21,7 +21,7 @@ class Moderator(db.Model, UserMixin):
         self.passhash = passhash
 
     def __repr__(self):
-        return '<Moderator %r' % self.name
+        return '<Moderator %r>' % self.name
 
     @classmethod
     def create(cls, name, email, password):
