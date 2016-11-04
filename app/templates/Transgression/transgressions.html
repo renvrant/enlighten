@@ -3,21 +3,24 @@
 {% block content %}
 <h1>All Incidents</h1>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
-      <div class="banner messages">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-
 <a href="{{ url_for('transgression.share')}}">Share!</a>
 
-{% if transgressions %}
+{% if ptgs %}
+
+<!-- this will display a list of all moderators and the number of
+    pending transgressions that are assigned to them. For dev purposes -->
+
+<ul>
+{% for mod in mods %}
+  <li><strong>{{mod.name}}</strong>: {{ptgs[mod.id]}}
+{% endfor %}
+</ul>
+
+{% endif %}
+
+{% if tgs %}
   <div class="transgressions">
-  {% for tg in transgressions %}
+  {% for tg in tgs %}
     <div class="transgression">
       <h3>
         <a href="{{ url_for('transgression.view', transgression_id=tg.id) }}">

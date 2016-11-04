@@ -20,8 +20,14 @@ class Moderator(db.Model, UserMixin):
         self.email = email
         self.passhash = passhash
 
+    def __repr__(self):
+        return '<Moderator %r' % self.name
+
     @classmethod
     def create(cls, name, email, password):
         pwhash = generate_password_hash(password)
         user = Moderator(name, email, pwhash)
         return user
+
+    def validate(self, password):
+        return check_password_hash(self.passhash, password)

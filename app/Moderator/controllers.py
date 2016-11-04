@@ -2,7 +2,8 @@ from functools import wraps
 
 from flask import Blueprint, render_template, session, \
                   redirect, request, url_for, flash, g, abort
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, \
+                        current_user
 from sqlalchemy.exc import IntegrityError
 
 from app import db
@@ -19,7 +20,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = Moderator.query.filter_by(email=form.email.data).first()
-        if user:
+        if user and user.validate(form.password.data):
             login_user(user)
             return redirect(url_for('mods.pending'))
         flash('Your email or password is incorrect!')
@@ -58,7 +59,10 @@ def create():
 @mods.route('/pending')
 @login_required
 def pending():
-    pending_tgs = Transgression.query.filter_by(status=False).all()
+    if current_user:
+        pending_tgs = Transgression.query.filter_by(status=False, moderator=current_user.id).all()
+    else:
+        pending_tgs = []
     return render_template('Moderator/pending.html', pending_transgressions=pending_tgs)
 
 

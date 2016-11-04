@@ -6,6 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from app import db
 from app.Transgression.forms import CreateTransgressionForm
 from app.Transgression.models import Transgression
+from app.Moderator.models import Moderator
 
 
 transgression = Blueprint('transgression', __name__, url_prefix='/common')
@@ -13,8 +14,19 @@ transgression = Blueprint('transgression', __name__, url_prefix='/common')
 
 @transgression.route('/')
 def index():
-    transgressions = Transgression.query.filter_by(status=True)
-    return render_template('Transgression/transgressions.html', transgressions=transgressions)
+    tgs = Transgression.query.filter_by(status=True)
+
+    # Uncomment this code to see which mods have pending from the index screen
+    # for development only
+    #
+    # tgs = Transgression.query.all()
+    # mods = [mod for mod in Moderator.query.all()]
+    # ptgs = {k.id: 0 for k in mods}
+    # for t in tgs:
+    #     key = t.moderator
+    #     if key in ptgs.keys():
+    #         ptgs[key] += 1
+    return render_template('Transgression/transgressions.html', tgs=tgs)  # , mods=mods, ptgs=ptgs)
 
 
 @transgression.route('/<transgression_id>')
