@@ -19,6 +19,10 @@ $nav-link-odd-colour: #eee;
   height: 100%;
   justify-content: flex-start;
 
+  .user-welcome {
+    align-self: center;
+  }
+
   .close-nav {
     display: block;
     padding: 20px;

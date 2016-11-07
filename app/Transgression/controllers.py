@@ -18,15 +18,15 @@ def index():
 
     # Uncomment this code to see which mods have pending from the index screen
     # for development only
-    #
-    # tgs = Transgression.query.all()
-    # mods = [mod for mod in Moderator.query.all()]
-    # ptgs = {k.id: 0 for k in mods}
-    # for t in tgs:
-    #     key = t.moderator
-    #     if key in ptgs.keys():
-    #         ptgs[key] += 1
-    return render_template('Transgression/transgressions.html', tgs=tgs)  # , mods=mods, ptgs=ptgs)
+
+    tgs = Transgression.query.all()
+    mods = [mod for mod in Moderator.query.all()]
+    ptgs = {k.id: 0 for k in mods}
+    for t in tgs:
+        key = t.moderator
+        if key in ptgs.keys() and not t.status:
+            ptgs[key] += 1
+    return render_template('Transgression/transgressions.html', tgs=tgs, mods=mods, ptgs=ptgs)
 
 
 @transgression.route('/<transgression_id>')

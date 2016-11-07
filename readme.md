@@ -73,6 +73,34 @@ db.session.commit()
 
 You can save the above snippet and run it in your environment. The moderator account should be ready to go!
 
+### Running tests
+
+If you've followed the previous steps for getting the project setup, you should just be able to run this command while in your activated virtual environment
+
+```bash
+nosetests
+```
+
+If you're having trouble running this command despite being in your virtual env, you may have to run this command directly like the others:
+
+```bash
+env/bin/nosetests
+```
+
+Use the `-s` flag in order to see any stdout to the console. This is useful if you're using print statements or (preferably) pdb to do some debugging with your tests
+
+```python
+# Some test
+def test_that_it_works(self):
+    import pdb; pdb.set_trace()  # start interactive debugger here
+    a = 2 + 2
+    self.assertEqual(a, 4)
+```
+
+```bash
+env/bin/nosetests -s
+```
+
 ### Contributing
 
 If you find any issues running the project, have some ideas for how to improve it, or any other kind

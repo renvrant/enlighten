@@ -70,6 +70,16 @@ def pending():
 @login_required
 def edit_tg(tg_id):
     tg = Transgression.query.get(tg_id)
+    if current_user and current_user.is_authenticated:
+        if not tg or tg.moderator != current_user.id:
+            flash('You do not have permission to view this resource.')
+            return redirect(url_for('mods.pending'))
+        if tg.status:
+            flash('You cannot edit an approved story')
+            return redirect(url_for('mods.pending'))
+    else:
+        flash('You do not have permission to view this resource.')
+        return redirect(url_for('mods.login'))
     form = EditForm(obj=tg)
     if form.validate_on_submit():
         try:
@@ -79,11 +89,13 @@ def edit_tg(tg_id):
             db.session.commit()
         except:
             print('Failure?')
+        flash('Incident Approved')
         return redirect(url_for('mods.pending'))
     if not tg_id:
+        flash('You do not have permission to view this resource.')
         return redirect(url_for('mods.pending'))
-    tg = Transgression.query.filter_by(id=tg_id).first()
     if not tg:
+        flash('No resource found by that ID: %d' % tg_id)
         return redirect(url_for('mods.pending'))
     return render_template('Moderator/edit.html', tg=tg, form=form)
 

@@ -1,12 +1,7 @@
-from app import app
-import unittest
+from ..base.base_test_case import BaseTestCase
 
 
-class EnlightenRootTests(unittest.TestCase):
-
-    def setUp(self):
-        self.app = app.test_client()
-        self.app.testing = True
+class EnlightenRootTests(BaseTestCase):
 
     def test_root_redirects(self):
         result = self.app.get('/')
@@ -14,4 +9,4 @@ class EnlightenRootTests(unittest.TestCase):
 
     def test_home_data(self):
         result = self.app.get('/common/')
-        self.assertIn('All transgressions', result.data)
+        self.assertIn('All Incidents', result.data)

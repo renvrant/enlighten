@@ -1,8 +1,8 @@
 import os
 
-from app import app
-
 from livereload import Server
+
+from app import app
 
 
 server = Server(app.wsgi_app)

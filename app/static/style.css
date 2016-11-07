@@ -13,21 +13,23 @@
       flex-direction: column;
       height: 100%;
       justify-content: flex-start; }
-      .side-navigation .close-nav {
-        display: block;
-        padding: 20px;
-        text-decoration: none; }
-        .side-navigation .nav-links {
-          margin: 0;
-          padding: 0;
-          width: 100%; }
-          .side-navigation .nav-links .nav-link:nth-of-type(odd) {
-            background: #eee; }
-            .side-navigation .nav-links .nav-link a {
-              display: block;
-              padding: 0.8rem;
-              text-decoration: none;
-              width: 100%; }
+      .side-navigation .user-welcome {
+        align-self: center; }
+        .side-navigation .close-nav {
+          display: block;
+          padding: 20px;
+          text-decoration: none; }
+          .side-navigation .nav-links {
+            margin: 0;
+            padding: 0;
+            width: 100%; }
+            .side-navigation .nav-links .nav-link:nth-of-type(odd) {
+              background: #eee; }
+              .side-navigation .nav-links .nav-link a {
+                display: block;
+                padding: 0.8rem;
+                text-decoration: none;
+                width: 100%; }
 
 .banner.flash-message {
   border-radius: 3px;
