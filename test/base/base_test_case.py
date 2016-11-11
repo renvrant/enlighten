@@ -14,8 +14,8 @@ class BaseTestCase(unittest.TestCase):
     email = 'tester@test.test'
     password = 'tester1234'
 
-    tgs_title = 'test incident title'
-    tgs_content = 'test incident body'
+    story_title = 'test incident title'
+    story_content = 'test incident body'
 
     def setUp(self):
         self.app = app.test_client()
@@ -49,9 +49,9 @@ class BaseTestCase(unittest.TestCase):
 
     def create_incident(self):
         response = self.app.post(
-            url_for('transgression.share'),
+            url_for('story.share'),
             data=dict(
-                title=self.tgs_title,
-                content=self.tgs_content),
+                title=self.story_title,
+                content=self.story_content),
             follow_redirects=True)
         return response

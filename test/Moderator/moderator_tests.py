@@ -2,7 +2,7 @@ from flask import url_for
 
 from app import db
 from app.Moderator.models import Moderator
-from app.Transgression.models import Transgression
+from app.Story.models import Story
 from ..base.base_test_case import BaseTestCase
 
 
@@ -18,12 +18,12 @@ class ModeratorTestCase(BaseTestCase):
     def test_should_allow_moderator_to_approve_pending_test(self):
         self.login()
         self.create_incident()
-        tg = Transgression.query.filter_by(title=self.tgs_title).first()
+        story = Story.query.filter_by(title=self.story_title).first()
 
         # Set pending status to approved
-        status, title, content = True, self.tgs_title, self.tgs_content
+        status, title, content = True, self.story_title, self.story_content
         response = self.app.post(
-            url_for('mods.edit_tg', tg_id=tg.id),
+            url_for('mods.edit_story', story_id=story.id),
             data=dict(
                 title=title,
                 content=content,
@@ -32,8 +32,8 @@ class ModeratorTestCase(BaseTestCase):
         self.assertIn('Incident Approved', response.data)
 
         # Check to see if incident shows up
-        response = self.app.get(url_for('transgression.index'), follow_redirects=True)
-        self.assertIn(self.tgs_title, response.data)
+        response = self.app.get(url_for('story.index'), follow_redirects=True)
+        self.assertIn(self.story_title, response.data)
 
     def test_should_not_allow_unassigned_user_to_approve_pending_story(self):
         # Create a new story
@@ -54,8 +54,8 @@ class ModeratorTestCase(BaseTestCase):
             follow_redirects=True)
 
         # Attempt to view edit page of pending story
-        tg = Transgression.query.filter_by(title=self.tgs_title).first()
-        response = self.app.get(url_for('mods.edit_tg', tg_id=tg.id),
+        story = Story.query.filter_by(title=self.story_title).first()
+        response = self.app.get(url_for('mods.edit_story', story_id=story.id),
                                 follow_redirects=True)
         self.assertIn('You do not have permission to view this resource.', response.data)
 

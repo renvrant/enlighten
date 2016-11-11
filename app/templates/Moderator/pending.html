@@ -3,13 +3,13 @@
 {% block content %}
 <h1>Incidents Pending Review</h1>
 
-{% if pending_transgressions %}
-  {% for tg in pending_transgressions %}
-    <div class="pending-tg">
+{% if pending_stories %}
+  {% for story in pending_stories %}
+    <div class="pending-story">
       <h4>
-        <a href="{{url_for('mods.edit_tg', tg_id=tg.id)}}">{{tg.title}}</a>
+        <a href="{{url_for('mods.edit_story', story_id=story.id)}}">{{story.title}}</a>
       </h4>
-      <div>{{tg.date_created}}</div>
+      <div>{{story.date_created}}</div>
     </div>
 
     <hr />

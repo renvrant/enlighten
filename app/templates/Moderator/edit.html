@@ -1,12 +1,12 @@
 {% extends 'Base/layout.html' %}
 
 {% block content %}
-<h1>Editing "{{tg.title}}"</h1>
+<h1>Editing "{{story.title}}"</h1>
 
 <a href="{{url_for('mods.pending')}}">Go back</a>
 
 <div class="clearfix">
-  <form class="col col-6 mx-auto" action="{{url_for('mods.edit_tg', tg_id=tg.id)}}" method="POST">
+  <form class="col col-6 mx-auto" action="{{url_for('mods.edit_story', story_id=story.id)}}" method="POST">
     {{ form.csrf_token }}
 
     <div class="form-group">

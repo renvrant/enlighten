@@ -64,12 +64,12 @@
         font-weight: bold;
         box-shadow: 0 5px 0 0 #424242; }
 
-.transgressions {
+.stories {
   display: flex;
   flex-wrap: wrap;
   padding-top: 2rem; }
 
-  .transgression {
+  .story {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,8 +78,8 @@
     height: 100px;
     background: #f7f7f7;
     text-align: center; }
-    .transgression a {
+    .story a {
       text-decoration: none;
       text-transform: lowercase; }
-      .transgression:nth-of-type(even) {
+      .story:nth-of-type(even) {
         background: #efefef; }

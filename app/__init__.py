@@ -21,12 +21,12 @@ login_manager.init_app(app)
 # Grab blueprints and necessary models
 from app.Moderator.controllers import mods as mods_bp
 from app.Moderator.models import Moderator as Mod
-from app.Transgression.controllers import transgression as tg_bp
+from app.Story.controllers import story as story_bp
 
 
 # Register blueprints with main app
 app.register_blueprint(mods_bp)
-app.register_blueprint(tg_bp)
+app.register_blueprint(story_bp)
 
 
 @login_manager.user_loader
@@ -42,7 +42,7 @@ def unauthorized():
 
 @app.route('/')
 def index():
-    return redirect(url_for('transgression.index'))
+    return redirect(url_for('story.index'))
 
 
 # Create the database

@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 from app import db
 from app.Moderator.forms import LoginForm, CreateForm, EditForm
 from app.Moderator.models import Moderator
-from app.Transgression.models import Transgression
+from app.Story.models import Story
 
 
 mods = Blueprint('mods', __name__, url_prefix='/private')
@@ -60,42 +60,42 @@ def create():
 @login_required
 def pending():
     if current_user:
-        pending_tgs = Transgression.query.filter_by(status=False, moderator=current_user.id).all()
+        pending_stories = Story.query.filter_by(status=False, moderator=current_user.id).all()
     else:
-        pending_tgs = []
-    return render_template('Moderator/pending.html', pending_transgressions=pending_tgs)
+        pending_stories = []
+    return render_template('Moderator/pending.html', pending_stories=pending_stories)
 
 
-@mods.route('/pending/edit/<tg_id>', methods=('GET', 'POST', ))
+@mods.route('/pending/edit/<story_id>', methods=('GET', 'POST', ))
 @login_required
-def edit_tg(tg_id):
-    tg = Transgression.query.get(tg_id)
+def edit_story(story_id):
+    story = Story.query.get(story_id)
     if current_user and current_user.is_authenticated:
-        if not tg or tg.moderator != current_user.id:
+        if not story or story.moderator != current_user.id:
             flash('You do not have permission to view this resource.')
             return redirect(url_for('mods.pending'))
-        if tg.status:
+        if story.status:
             flash('You cannot edit an approved story')
             return redirect(url_for('mods.pending'))
     else:
         flash('You do not have permission to view this resource.')
         return redirect(url_for('mods.login'))
-    form = EditForm(obj=tg)
+    form = EditForm(obj=story)
     if form.validate_on_submit():
         try:
-            tg.title = form.title.data
-            tg.content = form.content.data
-            tg.status = form.status.data
+            story.title = form.title.data
+            story.content = form.content.data
+            story.status = form.status.data
             db.session.commit()
         except:
             print('Failure?')
         flash('Incident Approved')
         return redirect(url_for('mods.pending'))
-    if not tg_id:
+    if not story_id:
         flash('You do not have permission to view this resource.')
         return redirect(url_for('mods.pending'))
-    if not tg:
-        flash('No resource found by that ID: %d' % tg_id)
+    if not story:
+        flash('No resource found by that ID: %d' % story_id)
         return redirect(url_for('mods.pending'))
-    return render_template('Moderator/edit.html', tg=tg, form=form)
+    return render_template('Moderator/edit.html', story=story, form=form)
 

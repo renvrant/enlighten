@@ -1,0 +1,36 @@
+{% extends 'Base/layout.html' %}
+
+{% block content %}
+<h1>All Incidents</h1>
+
+<a href="{{ url_for('story.share')}}">Share!</a>
+
+{% if ps %}
+
+<!-- this will display a list of all moderators and the number of
+    pending stories that are assigned to them. For dev purposes -->
+
+<ul>
+{% for mod in mods %}
+  <li><strong>{{mod.name}}</strong>: {{ps[mod.id]}}
+{% endfor %}
+</ul>
+
+{% endif %}
+
+{% if stories %}
+  <div class="stories">
+  {% for story in stories %}
+    <div class="story">
+      <h3>
+        <a href="{{ url_for('story.view', story_id=story.id) }}">
+          {{ story.title }}
+        </a>
+      </h3>
+    </div>
+  {% endfor %}
+  </div>
+{% else %}
+  No Stories found!
+{% endif %}
+{% endblock content %}

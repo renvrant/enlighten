@@ -2,20 +2,20 @@ from flask import url_for
 
 from app import db
 from app.Moderator.models import Moderator
-from app.Transgression.models import Transgression
+from app.Story.models import Story
 
 from test.base.base_test_case import BaseTestCase
 
 
-class TransgressionTestCase(BaseTestCase):
+class StoryTestCase(BaseTestCase):
 
-    def test_should_be_able_to_create_a_transgression(self):
-        total_tgs = len(Transgression.query.all())
+    def test_should_be_able_to_create_a_story(self):
+        total_tgs = len(Story.query.all())
         self.create_incident()
-        new_total_tgs = len(Transgression.query.all())
+        new_total_tgs = len(Story.query.all())
         self.assertGreater(new_total_tgs, total_tgs)
 
-    def test_should_randomly_assign_a_moderator_to_new_transgression(self):
+    def test_should_randomly_assign_a_moderator_to_new_story(self):
         self.login()
 
         # Create an additional moderator
@@ -30,7 +30,7 @@ class TransgressionTestCase(BaseTestCase):
         valid_mod_ids = [m.id for m in Moderator.query.all()]
 
         self.create_incident()
-        tg = Transgression.query.first()
+        tg = Story.query.first()
         self.assertIn(tg.moderator, valid_mod_ids)
 
 
@@ -55,6 +55,6 @@ class TransgressionTestCase(BaseTestCase):
 
         # Create another incident
         self.create_incident()
-        tgs = Transgression.query.filter_by(moderator=mod.id).all()
+        tgs = Story.query.filter_by(moderator=mod.id).all()
         self.assertEqual(len(tgs), 1)
         self.assertEqual(tgs[0].moderator, mod.id)

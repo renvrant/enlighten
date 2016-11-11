@@ -1,0 +1,11 @@
+{% extends 'Base/layout.html' %}
+
+{% block title %}{{story.title}}{% endblock title %}
+
+{% block content %}
+<h1>Story: {{ story.title }}</h1>
+
+<h4>{{ story.content }}</h4>
+
+<a href="{{ url_for('story.index') }}">Back</a>
+{% endblock content %}

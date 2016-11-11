@@ -4,7 +4,7 @@
 <h1>Share!</h1>
 
 <div class="clearfix">
-  <form class="col col-6 mx-auto" action="{{url_for('transgression.share')}}" method="POST">
+  <form class="col col-6 mx-auto" action="{{url_for('story.share')}}" method="POST">
     {{ form.csrf_token }}
 
     {% if form.errors %}
