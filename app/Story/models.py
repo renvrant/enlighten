@@ -2,6 +2,7 @@ import random
 
 from app import db
 from app.Moderator.models import Moderator
+from app.Comment.models import Comment
 
 
 class Story(db.Model):
@@ -13,17 +14,25 @@ class Story(db.Model):
     content = db.Column(db.Text, nullable=False)
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     moderator = db.Column(db.Integer, db.ForeignKey('moderator.id'))
+    comments = db.Column(db.ARRAY(db.Integer), nullable=True, default=[])
 
     # Pending/Active status determined by Moderators
     status = db.Column(db.Boolean, default=False)
+    allow_comments = db.Column(db.Boolean, default=False)
 
-    def __init__(self, title, content):
+    def __init__(self, title, content, allow_comments=False):
         self.title = title
         self.content = content
         self.moderator = self.get_random_moderator()
+        self.allow_comments = allow_comments
 
     def __repr__(self):
         return '<Story: %r>' % (self.title)
+
+    def get_comments(self):
+        for comment_id in self.comments:
+            comment = Comment.query.get(comment_id)
+            yield comment
 
     def get_random_moderator(self):
         # only choose moderators that have the fewest pending

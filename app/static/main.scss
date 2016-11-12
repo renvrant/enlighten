@@ -8,6 +8,8 @@ $nav-link-odd-colour: #eee;
 
 .main-content {
   padding: 2rem;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .side-navigation {
@@ -121,5 +123,58 @@ form {
 
   &:nth-of-type(even) {
     background: #efefef;
+  }
+}
+
+.all-comments, .comment-form {
+  margin: 0 auto;
+  width: 80%;
+}
+
+$level1: #efefef;
+$level2: #fefefe;
+$indent1: 1rem;
+$indent2: 2rem;
+$indent3: 3rem;
+
+.comment {
+  background: $level1;
+  margin: 2rem 0;
+  padding: .6rem;
+
+  .comment.level-2 {
+    background: $level2;
+    margin-left: $indent1;
+  }
+
+  .comment.level-3 {
+    background: $level1;
+    margin-left: $indent2;
+  }
+
+  .comment.level-4 {
+    background: $level2;
+    margin-left: $indent3
+  }
+
+  h4 {
+    margin-top: 0;
+  }
+
+  .comment-footer {
+    text-align: right;
+    padding: 0.5em;
+    border-top: 1px solid rgba(0,0,0,0.4);
+    margin-top: 0.5em;
+  }
+
+  .comment-form {
+    border: 1px solid rgba(0,0,0,0.4);
+    width: 100%;
+    margin-top: 0.5em;
+
+    form {
+      box-shadow: none;
+    }
   }
 }

@@ -2,10 +2,78 @@
 
 {% block title %}{{story.title}}{% endblock title %}
 
+{% macro nested_comments(comment, top_level=False, level_num=1) -%}
+<div class="comment {% if top_level %}top-level{% endif %} level-{{level_num}}">
+    <h4 class="comment-title">{{comment.title}}</h4>
+    {{comment.body}}
+    <div class="comment-footer">
+      <div>{{comment.get_date()}}</div>
+      {% if not level_num > 3 %}
+        <a class="toggle-reply-form" href="#">Reply</a>
+      {% endif %}
+    </div>
+
+    {% if not level_num > 3 %}
+      {{comment_form(comment.id)}}
+      <a href="#" class="hide-reply-form">Close</a>
+    {% endif %}
+
+    <div class="replies">
+      {% for reply in comment.get_replies() if not level_num > 3 %}
+        {{ nested_comments(reply, False, level_num+1) }}
+      {% endfor %}
+    </div>
+  </div>
+{%- endmacro %}
+
+{% macro form_action(story_id, reply_id=None) -%}
+  {% if reply_id %}
+    {{url_for('comment.new', story_id=story_id, comment_id=reply_id)}}
+  {% else %}
+    {{url_for('comment.new', story_id=story_id)}}
+  {% endif %}
+{%- endmacro %}
+
+{% macro comment_form(reply_id=None) -%}
+<div class="comment-form">
+  <form action="{{form_action(story.id, reply_id)}}" method="POST">
+    {{ form.csrf_token }}
+
+    <p class="form-group">
+      {{ form.title.label }} {{ form.title(size=20) }}
+    </p>
+
+    <p class="form-group">
+      {{ form.body.label }} {{ form.body() }}
+    </p>
+
+    <div class="form-button">
+      <button type="submit">Submit Comment</button>
+    </div>
+  </form>
+</div>
+{%- endmacro %}
+
 {% block content %}
 <h1>Story: {{ story.title }}</h1>
 
 <h4>{{ story.content }}</h4>
 
-<a href="{{ url_for('story.index') }}">Back</a>
+<!-- COMMENT FORM GOES HERE -->
+{% if story.allow_comments %}
+<hr>
+<h2>Comments</h2>
+{{ comment_form() }}
+
+<!-- comments -->
+{% if comments %}
+  <div class="all-comments">
+  {% for comment in comments %}
+    {{ nested_comments(comment, True) }}
+  {% endfor %}
+  </div>
+{% endif %}
+
+{% endif %}
+
 {% endblock content %}

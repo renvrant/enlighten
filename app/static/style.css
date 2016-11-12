@@ -3,7 +3,9 @@
   overflow: hidden; }
 
   .main-content {
-    padding: 2rem; }
+    padding: 2rem;
+    height: 100vh;
+    overflow-y: scroll; }
 
     .side-navigation {
       align-items: flex-end;
@@ -83,3 +85,34 @@
       text-transform: lowercase; }
       .story:nth-of-type(even) {
         background: #efefef; }
+
+.all-comments, .comment-form {
+  margin: 0 auto;
+  width: 80%; }
+
+  .comment {
+    background: #efefef;
+    margin: 2rem 0;
+    padding: 0.6rem; }
+    .comment .comment.level-2 {
+      background: #fefefe;
+      margin-left: 1rem; }
+      .comment .comment.level-3 {
+        background: #efefef;
+        margin-left: 2rem; }
+        .comment .comment.level-4 {
+          background: #fefefe;
+          margin-left: 3rem; }
+          .comment h4 {
+            margin-top: 0; }
+            .comment .comment-footer {
+              text-align: right;
+              padding: 0.5em;
+              border-top: 1px solid rgba(0, 0, 0, 0.4);
+              margin-top: 0.5em; }
+              .comment .comment-form {
+                border: 1px solid rgba(0, 0, 0, 0.4);
+                width: 100%;
+                margin-top: 0.5em; }
+                .comment .comment-form form {
+                  box-shadow: none; }

@@ -6,6 +6,8 @@ from sqlalchemy.exc import IntegrityError
 from app import db
 from app.Story.forms import CreateStoryForm
 from app.Story.models import Story
+from app.Comment.models import Comment, Reply
+from app.Comment.forms import CommentForm
 from app.Moderator.models import Moderator
 
 
@@ -31,10 +33,14 @@ def index():
 
 @story.route('/<story_id>')
 def view(story_id):
+    form = CommentForm()
     if story_id:
         story = Story.query.filter_by(id=story_id).first()
+        cmts = Comment.query.filter_by(story=story.id).all()
+        replies = [r.comment_id for r in Reply.query.all()]
+        comments = [c for c in cmts if c.id not in replies]
         if story:
-            return render_template('Story/view.html', story=story)
+            return render_template('Story/view.html', story=story, form=form, comments=comments)
         return redirect(url_for('story.index'))
     return redirect(url_for('story.index'))
 
@@ -44,8 +50,11 @@ def share():
     form = CreateStoryForm()
     if form.validate_on_submit():
         try:
-            tg = Story(form.title.data, form.content.data)
-            db.session.add(tg)
+            story = Story(
+                form.title.data,
+                form.content.data,
+                form.allow_comments.data)
+            db.session.add(story)
             db.session.commit()
         except IntegrityError:
             flash('Error saving!')

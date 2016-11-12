@@ -21,11 +21,13 @@ login_manager.init_app(app)
 # Grab blueprints and necessary models
 from app.Moderator.controllers import mods as mods_bp
 from app.Moderator.models import Moderator as Mod
+from app.Comment.controllers import comment as comment_bp
 from app.Story.controllers import story as story_bp
 
 
 # Register blueprints with main app
 app.register_blueprint(mods_bp)
+app.register_blueprint(comment_bp)
 app.register_blueprint(story_bp)
 
 
