@@ -1,7 +1,7 @@
 ## Enlighten (Hey, it's a working title...)
 
 Simple python app made for the purpose of sharing stories with others
-about difficulties and transgressions that minority groups experience in
+about the difficulties that minority groups experience in
 the work place. The goal of this project is to raise awareness for people
 about the challenges that minority groups experience
 (and hopefully to inspire change).
