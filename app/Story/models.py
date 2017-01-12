@@ -19,7 +19,6 @@ class Story(db.Model):
     # Pending/Active status determined by Moderators
     status = db.Column(db.Boolean, default=False)
     allow_comments = db.Column(db.Boolean, default=False)
-    content_warning = db.Column(db.Boolean, default=False)
 
     def __init__(self, title, content, allow_comments=False, content_warning=False):
         self.title = title
