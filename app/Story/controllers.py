@@ -53,7 +53,8 @@ def share():
             story = Story(
                 form.title.data,
                 form.content.data,
-                form.allow_comments.data)
+                form.allow_comments.data,
+                form.content_warning.data)
             db.session.add(story)
             db.session.commit()
         except IntegrityError:

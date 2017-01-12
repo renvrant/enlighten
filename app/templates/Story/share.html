@@ -25,6 +25,11 @@
     </p>
 
     <p class="form-group">
+      {{ form.content_warning.label }}
+      {{ form.content_warning() }}
+    </p>
+
+    <p class="form-group">
       {{ form.allow_comments.label }}
       {{ form.allow_comments() }}
     </p>

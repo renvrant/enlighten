@@ -55,6 +55,9 @@
 {%- endmacro %}
 
 {% block content %}
+{% if story.content_warning %}
+  <h2 class="content-warning">Content Warning</h2>
+{% endif %}
 <h1>Story: {{ story.title }}</h1>
 
 <h4>{{ story.content }}</h4>
