@@ -27,6 +27,9 @@
           {{ story.title }}
         </a>
       </h3>
+      {% if story.content_warning %}
+        <div class="content-warning">Content Warning</div>
+      {% endif %}
     </div>
   {% endfor %}
   </div>

@@ -4,7 +4,6 @@ from app import db
 from app.Moderator.models import Moderator
 from app.Comment.models import Comment
 
-
 class Story(db.Model):
 
     __tablename__ = 'story'
@@ -15,16 +14,19 @@ class Story(db.Model):
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     moderator = db.Column(db.Integer, db.ForeignKey('moderator.id'))
     comments = db.Column(db.ARRAY(db.Integer), nullable=True, default=[])
+    content_warning = db.Column(db.ARRAY(db.Integer), nullable=True, default=[])
 
     # Pending/Active status determined by Moderators
     status = db.Column(db.Boolean, default=False)
     allow_comments = db.Column(db.Boolean, default=False)
+    content_warning = db.Column(db.Boolean, default=False)
 
-    def __init__(self, title, content, allow_comments=False):
+    def __init__(self, title, content, allow_comments=False, content_warning=False):
         self.title = title
         self.content = content
         self.moderator = self.get_random_moderator()
         self.allow_comments = allow_comments
+        self.content_warning = content_warning
 
     def __repr__(self):
         return '<Story: %r>' % (self.title)

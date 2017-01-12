@@ -1,37 +1,40 @@
-.app-container {
-  height: 100vh;
-  overflow: hidden; }
+* {
+  box-sizing: border-box; }
 
-  .main-content {
-    padding: 2rem;
+  .app-container {
     height: 100vh;
-    overflow-y: scroll; }
+    overflow: hidden; }
 
-    .side-navigation {
-      align-items: flex-end;
-      background: #f7f7f7;
-      border-right: 1px solid rgba(0, 0, 0, 0.08);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      justify-content: flex-start; }
-      .side-navigation .user-welcome {
-        align-self: center; }
-        .side-navigation .close-nav {
-          display: block;
-          padding: 20px;
-          text-decoration: none; }
-          .side-navigation .nav-links {
-            margin: 0;
-            padding: 0;
-            width: 100%; }
-            .side-navigation .nav-links .nav-link:nth-of-type(odd) {
-              background: #eee; }
-              .side-navigation .nav-links .nav-link a {
-                display: block;
-                padding: 0.8rem;
-                text-decoration: none;
-                width: 100%; }
+    .main-content {
+      padding: 2rem;
+      height: 100vh;
+      overflow-y: scroll; }
+
+      .side-navigation {
+        align-items: flex-end;
+        background: #f7f7f7;
+        border-right: 1px solid rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: flex-start; }
+        .side-navigation .user-welcome {
+          align-self: center; }
+          .side-navigation .close-nav {
+            display: block;
+            padding: 20px;
+            text-decoration: none; }
+            .side-navigation .nav-links {
+              margin: 0;
+              padding: 0;
+              width: 100%; }
+              .side-navigation .nav-links .nav-link:nth-of-type(odd) {
+                background: #eee; }
+                .side-navigation .nav-links .nav-link a {
+                  display: block;
+                  padding: 0.8rem;
+                  text-decoration: none;
+                  width: 100%; }
 
 .banner.flash-message {
   border-radius: 3px;
@@ -73,6 +76,7 @@
 
   .story {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     margin: 1rem;
@@ -85,34 +89,49 @@
       text-transform: lowercase; }
       .story:nth-of-type(even) {
         background: #efefef; }
+        .story .content-warning {
+          font-size: 0.7em;
+          position: absolute;
+          width: 100%;
+          bottom: 0;
+          left: 0; }
 
-.all-comments, .comment-form {
-  margin: 0 auto;
-  width: 80%; }
+.content-warning {
+  font-weight: normal;
+  font-size: 1em;
+  padding: 0.5em;
+  background: red;
+  text-transform: uppercase;
+  color: white;
+  display: inline-block; }
 
-  .comment {
-    background: #efefef;
-    margin: 2rem 0;
-    padding: 0.6rem; }
-    .comment .comment.level-2 {
-      background: #fefefe;
-      margin-left: 1rem; }
-      .comment .comment.level-3 {
-        background: #efefef;
-        margin-left: 2rem; }
-        .comment .comment.level-4 {
-          background: #fefefe;
-          margin-left: 3rem; }
-          .comment h4 {
-            margin-top: 0; }
-            .comment .comment-footer {
-              text-align: right;
-              padding: 0.5em;
-              border-top: 1px solid rgba(0, 0, 0, 0.4);
-              margin-top: 0.5em; }
-              .comment .comment-form {
-                border: 1px solid rgba(0, 0, 0, 0.4);
-                width: 100%;
+  .all-comments, .comment-form {
+    margin: 0 auto;
+    width: 80%; }
+
+    .comment {
+      background: #efefef;
+      margin: 2rem 0;
+      padding: 0.6rem; }
+      .comment .comment.level-2 {
+        background: #fefefe;
+        margin-left: 1rem; }
+        .comment .comment.level-3 {
+          background: #efefef;
+          margin-left: 2rem; }
+          .comment .comment.level-4 {
+            background: #fefefe;
+            margin-left: 3rem; }
+            .comment h4 {
+              margin-top: 0; }
+              .comment .comment-footer {
+                text-align: right;
+                padding: 0.5em;
+                border-top: 1px solid rgba(0, 0, 0, 0.4);
                 margin-top: 0.5em; }
-                .comment .comment-form form {
-                  box-shadow: none; }
+                .comment .comment-form {
+                  border: 1px solid rgba(0, 0, 0, 0.4);
+                  width: 100%;
+                  margin-top: 0.5em; }
+                  .comment .comment-form form {
+                    box-shadow: none; }
